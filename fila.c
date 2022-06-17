@@ -48,12 +48,13 @@ void mostrar_senha_atual(Node *fila){
   }
 }
 
-Node* remover_da_fila(Node **fila){
+Node* remover_da_fila(Node **fila, int *cont){
   Node *remover = NULL;
 
   if (*fila){
     remover = *fila;
     *fila = remover->prox;
+    *cont = *cont + 1;
   }
   return remover;
 }
@@ -67,29 +68,37 @@ void imprimir_fila(Node *fila){
   }
 }
 
+void consultar_atendimentos(int *cont){
+  printf("\nTotal de atendimentos realizados: %d", *cont);
+}
 
 int main(){
   Node *fila = NULL;
   int senha = 0;
   int op = 0;
-
+  int cont = 0;
+  
   while (op != 5){
     printf("\n\n======= Menu =======\n1 - Gerar senha\n2 - Atender pessoa\n3 - Visualizar fila\n4 - Consultar atendimentos realizados\n5 - Sair\n\n");
     scanf("%d", &op);
     switch(op){
       case 1:
+        system("clear");
         gerar_numero(&senha);
         inserir_na_fila(&fila, senha);
       break;
       case 2:
+        system("clear");
         mostrar_senha_atual(fila);
-        remover_da_fila(&fila);
+        remover_da_fila(&fila, &cont);
         break;
       case 3:
+        system("clear");
         imprimir_fila(fila);
         break;
       case 4:
-        
+        system("clear");
+        consultar_atendimentos(&cont);
         break;
       case 5:
         break;
